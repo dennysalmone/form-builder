@@ -1,0 +1,9 @@
+<mat-toolbar class="navbar">
+    <div><span class="small-text">Hello, {{userName}}!</span></div>
+    <div><span>Form Builder</span></div>
+    <div routerLinkActive="active"><span class='clickable blue' (click)="logout()"><mat-icon class="big-size">exit_to_app</mat-icon></span></div>
+</mat-toolbar>
+
+<div class="auth-block">
+    <router-outlet></router-outlet>
+</div>

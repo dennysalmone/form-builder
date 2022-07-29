@@ -1,0 +1,33 @@
+.overlay-form {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    background: linear-gradient(0deg, rgba(245,245,245,0.5) 0%, rgba(233,233,233,0.5) 45%);
+    padding: 6px;
+    border-radius: 6px;
+    margin-top: 10px;
+    width: 500px
+}
+
+.title {
+    margin: 4px; 
+}
+
+button {
+    margin: 4px;
+}
+
+input {
+    margin: 4px;
+}
+
+.helper-text-red {
+    font-size: 10px;
+    color: red;
+}
+
+.mat-form-field {
+    display: block;
+}

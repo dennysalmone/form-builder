@@ -1,0 +1,36 @@
+<div class="overlay-form">
+  <form 
+  class="container" 
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col form-cover z-depth-1" id="panell">
+      <h3 class="title">Login Form</h3>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" class="validate" placeholder="Enter your email">
+          <mat-hint *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="helper-text-red">Please enter a valid email</mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" class="validate" placeholder="Enter your email">
+          <mat-hint *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="helper-text-red">Please enter a valid password</mat-hint>
+        </mat-form-field>
+      </p>
+        <button 
+          mat-stroked-button
+          type="submit"
+          class="waves-effect waves-light btn indigo darken-1 margin-button" 
+          id="loginbtn"
+          [disabled]="form.invalid || form.disabled"
+        >Login</button>
+    </div>
+  </div>
+</form>
+</div>
+
+<p>canon@mail.com</p>
+

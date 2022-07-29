@@ -1,0 +1,1 @@
+export const CBorders: string[] = ['solid', 'dotted', 'dashed', 'double', 'groove', 'ridge', 'inset', 'outset', 'none', 'hidden'];

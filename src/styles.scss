@@ -1,0 +1,23 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Montserrat, "Helvetica Neue", sans-serif; text-decoration: none !important}
+button { background-color: #EEF2F4;}
+
+.success-toast {
+    background-color: rgb(107, 176, 255) !important;
+    color: black !important;
+    button {
+        background-color: rgb(87, 156, 235) !important;
+        color: black !important;
+    };
+}
+
+.error-toast {
+    background-color: rgb(255, 208, 107) !important;
+    color: black !important;
+    button {
+        background-color: rgb(235, 188, 87) !important;
+        color: black !important;
+    };
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
