@@ -10,7 +10,8 @@ import { IUser } from "src/app/shared/types and interfaces/interfaces";
   providedIn: 'root'
 })
 export class AuthService {
-  private token = ''
+  private token: string;
+  private userName: string;
   constructor(private http: HttpClient, private router: Router) {
 
   }
@@ -20,25 +21,33 @@ export class AuthService {
   }
 
   login(user: IUser): Observable<{token: string, userName: string}> {
-      return this.http.post<{token: string, userName: string}>(`${environment.URL}login`, user)
-      .pipe(
-          tap(
-              ({token, userName}) => {
-                localStorage.setItem('authToken', token);
-                localStorage.setItem('userName', userName);
-                this.setToken(token);
-                this.setTokenFromLocalStorage();
-              }
-          )
+    return this.http.post<{token: string, userName: string}>(`${environment.URL}login`, user)
+    .pipe(
+      tap(
+        ({token, userName}) => {
+          localStorage.setItem('authToken', token);
+          this.setUserName(userName);
+          this.setToken(token);
+          this.setTokenFromLocalStorage();
+        }
       )
+    )
+  }
+
+  setUserName(name: string){
+    this.userName = name;
+  }
+
+  getUserName(): string {
+    return this.userName;
   }
 
   setToken (token: string): void {
-      this.token = token;
+    this.token = token;
   }
 
   getToken(): string {
-      return this.token;
+    return this.token;
   }
 
   setTokenFromLocalStorage(): void {
@@ -47,12 +56,12 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-      return !!this.token;
+    return !!this.token;
   }
 
   logout(): void {
-      this.setToken('');
-      localStorage.removeItem('authToken');
-      this.router.navigate(['/auth/login']);
+    this.setToken('');
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/auth/login']);
   }
 }

@@ -11,4 +11,14 @@ export interface IAuthorization {
     form: FormGroup;
     authSub: Subscription;
     onSubmit(): void;
-}
+} 
+
+export interface IStyles {
+    'color': string, 
+    'width': string,
+    'height': string,
+    'font-weight': string,
+    'font-size': string,
+    'placeholder': string,
+    'border-style': string
+  }

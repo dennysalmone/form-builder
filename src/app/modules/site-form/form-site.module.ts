@@ -10,11 +10,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SwitchBuilderComponent } from './switch-builder/switch-builder.component';
 
 @NgModule({
   declarations: [
     SiteLayoutComponent,
     FormPageComponent,
+    SwitchBuilderComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +29,8 @@ import { MatInputModule } from '@angular/material/input';
     DragDropModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ]
 })
 export class FormSiteModule { }

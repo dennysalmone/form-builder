@@ -1,14 +1,13 @@
 export type TFormElement = {
-    type: string,
-    id: number,
+    inputType: string,
     placeholder: string,
     color: string,
-    width: number,
-    height: number,
+    width: string,
+    height: string,
     required: boolean,
     border: string,
-    fontWeight: string | number,
-    fontSize: string | number,
+    fontWeight: string,
+    fontSize: string,
     options: string[]
 }
 
