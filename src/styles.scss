@@ -1,6 +1,4 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Montserrat, "Helvetica Neue", sans-serif; text-decoration: none !important}
-button { background-color: #EEF2F4;}
+@import "src/assets/variables";
 
 .success-toast {
     background-color: rgb(107, 176, 255) !important;
@@ -19,5 +17,15 @@ button { background-color: #EEF2F4;}
         color: black !important;
     };
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button { 
+    background-color: $grey
+}
+
+html, body { 
+    height: 100% 
+}
+
+body { 
+    margin: 0; @include default-fonts()
+}

@@ -1,21 +1,21 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store"
-import { STYLE_KEY } from "./actions";
-import { IState } from "./interfaces";
+import { STYLE_KEY } from "./styles.enums";
+import { IState } from "./styles.interfaces";
 
 
-export const featureSelector = createFeatureSelector<IState>(STYLE_KEY);
+export const globalSelector = createFeatureSelector<IState>(STYLE_KEY);
 
 export const countSelector = createSelector(
-    featureSelector,
+    globalSelector,
     state => state.counter
 )
 
 export const generalSelector = createSelector(
-    featureSelector,
+    globalSelector,
     state => state.generalStyles
 )
 
 export const elementSelector = createSelector(
-    featureSelector,
+    globalSelector,
     state => state.elementStyles
 )

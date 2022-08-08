@@ -1,5 +1,7 @@
+@import "src/assets/variables";
+
 .container {
-    margin: 6px;
+    @include margin-element(6px);
     border-radius: 6px;
     max-width: 1200px;
     display: flex;
@@ -14,7 +16,7 @@
 }
 
 .table-fields {
-    border: 1px solid #C2D6E1;
+    border: 1px solid $light;
     margin: 15px;
     width: 400px;
     border-radius: 4px;
@@ -25,25 +27,25 @@
 }
 
 .element {
-    border-bottom: 1px solid #C2D6E1;
+    border-bottom: 1px solid $light;
     padding: 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: $textRegular;
 }
 
 .form-edit-form {
-    border-bottom: 1px solid #C2D6E1;
+    border-bottom: 1px solid $light;
     padding: 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: $textRegular;
 }
 
 .draggable {
@@ -65,7 +67,7 @@
 }
 
 .grad-1 {
-    background: linear-gradient(0deg, rgba(255,255,255,1) 50%, rgba(240,240,240,1) 90%);
+    background: $gradient;
 }
 
 .form-element {
@@ -77,18 +79,18 @@
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: $textRegular;
 }
 
 .label {
-    font-size: 20px;
+    font-size: $textBig;
     padding: 8px;
     justify-content: center;
-    border-bottom: 1px solid #C2D6E1;
+    border-bottom: 1px solid $light;
 }
 
 .choised {
-    background-color: #C2D6E1;
+    background-color: $light;
 }
 
 .full-width {
@@ -110,9 +112,7 @@
 .cdk-drag-preview {
     box-sizing: border-box;
     border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.20),
-                0 8px 10px 1px rgba(0, 0, 0, 0.15),
-                0 3px 14px 2px rgba(0, 0, 0, 0.10);
+    box-shadow: $shadows
   }
   
 .cdk-drag-placeholder {
@@ -127,12 +127,21 @@
     border: none;
 }
 
+.temperature {
+    background-color: $light;
+    width: 300px;
+    height: 100px;
+    margin: 4px;
+    padding: 4px;
+    border-radius: 4px;
+}
+
 .table-fields.cdk-drop-list-dragging .element:not(.cdk-drag-placeholder) {
     transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .red-small {
-    font-size: 12px;
+    font-size: $textSmall;
     color: red;
 }
 

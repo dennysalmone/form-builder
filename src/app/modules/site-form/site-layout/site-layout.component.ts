@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthService } from '../../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-site-layout',
@@ -27,9 +27,8 @@ export class SiteLayoutComponent implements OnInit, OnDestroy {
   subscribeUser(): void {
     this.userSub = this.route.data.subscribe(data => {
       this.userName = data['userName'];
-      if(this.userName){
-        this.putUserNameToLocalStorage(this.userName)
-      }
+      if(!this.userName) return;
+      this.putUserNameToLocalStorage(this.userName)
     })
   }
 

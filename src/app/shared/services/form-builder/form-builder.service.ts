@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TForm, TFormElement } from '../types and interfaces/types';
+import { TForm, TFormElement } from '../../types and interfaces/types';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,9 @@ export class FormBuilderService {
   constructor() { }
 
   createFormElement (droppedType: string): {[key:number]:TFormElement} { 
+    const key = this.generateUniqId();
     return {
-      [this.generateQniqId()]: {
+      [key]: {
         inputType: droppedType,
         placeholder: `${droppedType} label`,
         color: '#000000',
@@ -25,7 +26,7 @@ export class FormBuilderService {
     }
   }
 
-  generateQniqId(): number {
+  generateUniqId(): number {
     return +(Math.random().toString().slice(2));
   }
 

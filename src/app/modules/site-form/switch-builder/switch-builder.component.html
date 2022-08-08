@@ -1,6 +1,6 @@
 <ng-container [ngSwitch]="item.inputType">
     
-    <ng-container *ngSwitchCase="inputEnum.Input">
+    <ng-container *ngSwitchCase="EInputType.Input">
         <input 
         cdkDrag 
         [cdkDragDisabled]="true" 
@@ -10,14 +10,14 @@
         [required]='item.required'>
     </ng-container>
 
-    <ng-container *ngSwitchCase="inputEnum.Textarea">
+    <ng-container *ngSwitchCase="EInputType.Textarea">
         <textarea 
         [ngStyle]="styles"  
         [required]='item.required'
         cdkDrag [cdkDragDisabled]="true" [placeholder]="item.placeholder" class='form-element' name="textarea"></textarea>
     </ng-container>
 
-    <ng-container *ngSwitchCase="inputEnum.Button">
+    <ng-container *ngSwitchCase="EInputType.Button">
         <button 
         cdkDrag 
         [cdkDragDisabled]="true" 
@@ -27,7 +27,7 @@
         </button>
     </ng-container>
 
-    <ng-container *ngSwitchCase="inputEnum.Checkbox">
+    <ng-container *ngSwitchCase="EInputType.Checkbox">
         <div>
             <label 
             cdkDrag 
@@ -44,7 +44,7 @@
         </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="inputEnum.Select">
+    <ng-container *ngSwitchCase="EInputType.Select">
         <select 
         cdkDrag 
         [cdkDragDisabled]="true" 

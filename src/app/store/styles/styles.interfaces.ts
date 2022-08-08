@@ -14,6 +14,11 @@ export interface IElementStyles {
     [key: number]: TFormElement
 }
 
+export interface IPayloadElement {
+    obj: IElementStyles,
+    key: number
+}
+
 export interface IElementKey {
     key: number
 }

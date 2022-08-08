@@ -17,7 +17,7 @@ import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

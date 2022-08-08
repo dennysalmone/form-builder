@@ -34,7 +34,7 @@
           <form *ngIf="elementFormIsVisible && elementStylesBase[counter]" (ngSubmit)="onElementSubmit(counter)" [formGroup]="elementStylesForm" class="example-form">
             <mat-form-field class="full-width mat-form-el" appearance="fill">
               <mat-label>Label</mat-label>
-              <input matInput formControlName="label">
+              <input matInput formControlName="placeholder">
             </mat-form-field>
             <mat-form-field class="half-width mat-form-el" appearance="fill">
               <mat-label>Width</mat-label>
@@ -46,7 +46,7 @@
             </mat-form-field>
             <mat-form-field class="half-width mat-form-el" appearance="fill">
               <mat-label>Border Style</mat-label>
-              <mat-select formControlName="borderStyle">
+              <mat-select formControlName="border">
                 <mat-option *ngFor="let border of borders" [value]="border">
                   {{border}}
                 </mat-option>
@@ -64,11 +64,11 @@
               <mat-label>Font Size</mat-label>
               <input matInput type="number" formControlName="fontSize">
             </mat-form-field>
-            <mat-form-field *ngIf="elementStylesBase[counter].inputType == inputEnum.Select || elementStylesBase[counter].inputType == inputEnum.Checkbox" class="half-width mat-form-el" appearance="fill">
+            <mat-form-field *ngIf="elementStylesBase[counter].inputType == EInputType.Select || elementStylesBase[counter].inputType == EInputType.Checkbox" class="half-width mat-form-el" appearance="fill">
               <mat-label>Add field</mat-label>
               <input placeholder='split by ","' matInput formControlName="newField">
             </mat-form-field>
-            <section *ngIf="elementStylesBase[counter].inputType !== inputEnum.Checkbox && elementStylesBase[counter].inputType !== inputEnum.Button" class="mat-form-el" appearance="fill">
+            <section *ngIf="elementStylesBase[counter].inputType !== EInputType.Checkbox && elementStylesBase[counter].inputType !== EInputType.Button" class="mat-form-el" appearance="fill">
               <mat-checkbox matInput formControlName="required">Required</mat-checkbox>
             </section>
             <div class="button-group">
@@ -77,8 +77,6 @@
             </div>
           </form>
       </div>
-
-<!-- second block -->
 
       <div [ngStyle]="{'background': generalStyles.backgroundColor, 'border': generalStyles.borderType, 'border-color': generalStyles.borderColor}" class="table-fields">
         <div class="list-container">
@@ -89,79 +87,21 @@
               [cdkDropListData]="dropSection"
               [cdkDropListConnectedTo]="[secondList]"
               class="list-container"
-              (cdkDropListDropped)="dropped($event)">
+              (cdkDropListDropped)="dropped($any($event))">
               <ng-container *ngFor="let item of dropSection">
-                <div class="flex" [ngClass]="{'choised': item === counter}" (click)="changeCounter(item)" >
-
+                <div class="flex" [ngClass]="{'choised': +item === counter}" (click)="changeCounter(+item)" >
                   <app-switch-builder 
-                  [item]="elementStylesBase[item]"
-                  [styles]="elementStyles(elementStylesBase[item])"
+                  [item]="elementStylesBase[+item]"
+                  [styles]="elementStyles(elementStylesBase[+item])"
                   >
-                </app-switch-builder>
-
-                <!-- <ng-container *ngIf="elementStylesBase[item].inputType === inputEnum.Input">
-                    <input 
-                    cdkDrag 
-                    [cdkDragDisabled]="true" 
-                    [placeholder]="elementStylesBase[item].placeholder" 
-                    class='form-element'
-                    [ngStyle]="elementStyles(elementStylesBase[item])" 
-                    [required]='elementStylesBase[item].required'
-                    >
-                </ng-container>
-                <ng-container *ngIf="elementStylesBase[item].inputType === inputEnum.Textarea">
-                  <textarea 
-                  [ngStyle]="elementStyles(elementStylesBase[item])"  
-                  [required]='elementStylesBase[item].required'
-                  cdkDrag [cdkDragDisabled]="true" [placeholder]="elementStylesBase[item].placeholder" class='form-element' name="textarea"></textarea>
-                </ng-container>
-                <ng-container *ngIf="elementStylesBase[item].inputType === inputEnum.Button">
-                  <button 
-                  cdkDrag 
-                  [cdkDragDisabled]="true" 
-                  class='form-element'
-                  [ngStyle]="elementStyles(elementStylesBase[item])"  
-                  >{{elementStylesBase[item].placeholder}}</button>
-                </ng-container>
-                <ng-container *ngIf="elementStylesBase[item].inputType === inputEnum.Checkbox">
-                  <div>
-                    <label 
-                    cdkDrag 
-                    [cdkDragDisabled]="true" 
-                    class='form-element'
-                    [ngStyle]="elementStyles(elementStylesBase[item])"  
-                    >{{elementStylesBase[item].placeholder}}</label>
-                    <ng-container *ngFor="let option of elementStylesBase[item].options, index as o">
-                      <div>
-                        <input type='checkbox'> {{option}}
-                      </div>
-                    </ng-container>
-                  </div>
-                </ng-container>
-                <ng-container *ngIf="elementStylesBase[item].inputType === inputEnum.Select">
-                  <select 
-                  cdkDrag 
-                  [cdkDragDisabled]="true" 
-                  label="item.label" 
-                  class='form-element' 
-                  name="select"
-                  [ngStyle]="elementStyles(elementStylesBase[item])"  
-                  [required]='elementStylesBase[item].required'
-                  >
-                    <option disabled selected>{{elementStylesBase[item].placeholder}}</option>
-                    <ng-container *ngFor="let option of elementStylesBase[item].options, index as o">
-                      <option>{{option}}</option>
-                    </ng-container>
-                  </select>
-                </ng-container> -->
-                <span *ngIf="elementStylesBase[item].required" class="red-small">*</span>
+                  </app-switch-builder>
+                <span *ngIf="elementStylesBase[+item].required" class="red-small">*</span>
               </div>
               </ng-container>
             </div>
           </div>
         </div>
 
-<!-- third block -->
 
         <div class="table-fields">
             <div class="list-container">
@@ -177,3 +117,12 @@
         </div>
     </div>
 </div>
+
+<div class="temperature">
+  <input customOnlyNumbers [(ngModel)]="temperature">
+  <div>
+    {{temperature | customTemperature: 'F'}}
+  </div>
+</div>
+
+

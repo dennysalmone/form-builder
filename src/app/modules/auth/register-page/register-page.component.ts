@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../../shared/services/auth.service';
-import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { isEmailValidator } from 'src/app/shared/data/validators';
+import { AuthService } from '../../../shared/services/auth/auth.service';
+import { SnackbarService } from '../../../shared/services/snackbar/snackbar.service';
 import { IAuthorization } from '../../../shared/types and interfaces/interfaces';
 
 @Component({
@@ -27,7 +28,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy, IAuthorization 
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, isEmailValidator()]),
       userName: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     })

@@ -12,6 +12,6 @@ export class SwitchBuilderComponent {
 
   @Input() item: TFormElement;
   @Input() styles: IStyles;
-  public inputEnum = EInputType;
+  public EInputType = EInputType;
 
 }

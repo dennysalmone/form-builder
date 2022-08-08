@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
-import { change, generalStylesUpdate, elementStylesCreate, elementStylesUpdate, elementStylesDelete } from "./actions";
-import { IState } from "./interfaces";
+import { change, generalStylesUpdate, elementStylesCreate, elementStylesUpdate, elementStylesDelete } from "./styles.actions";
+import { IState } from "./styles.interfaces";
 
 export const initialState: IState = {
     counter: 0,
@@ -28,12 +28,11 @@ export const stylesReducer = createReducer(
         ...state,
         elementStyles: Object.assign({}, state.elementStyles, elStyles)
     })),
-    on(elementStylesUpdate, (state, elStyles: any) => {
-        const index = Object.keys(elStyles)[0] as unknown as number;
-        return {...state, elementStyles:{...state.elementStyles, [index]:elStyles[index]}};
-    }),
+    on(elementStylesUpdate, (state, elStyles) => ({
+        ...state, elementStyles:{...state.elementStyles, [elStyles.key]:elStyles.obj[elStyles.key]}
+    })),
     on(elementStylesDelete, (state, el) => {
-        let elements = {...state.elementStyles}
+        let elements = {...state.elementStyles};
         delete elements[el.key];
         return {...state, elementStyles: elements };
     })

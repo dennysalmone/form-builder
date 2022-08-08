@@ -14,11 +14,16 @@ export interface IAuthorization {
 } 
 
 export interface IStyles {
-    'color': string, 
-    'width': string,
-    'height': string,
-    'font-weight': string,
-    'font-size': string,
-    'placeholder': string,
-    'border-style': string
-  }
+    color: string, 
+    width: string,
+    height: string,
+    fontWeight: string,
+    fontSize: string,
+    placeholder: string,
+    borderStyle: string
+}
+
+export interface ITokenUser {
+    token: string,
+    userName: string
+}
