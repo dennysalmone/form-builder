@@ -1,10 +1,12 @@
+@import "src/assets/variables";
+
 .overlay-form {
     display: flex;
     justify-content: center;
 }
 
 .container {
-    background: linear-gradient(0deg, rgba(245,245,245,0.5) 0%, rgba(233,233,233,0.5) 45%);
+    background: $gradient-2;
     padding: 6px;
     border-radius: 6px;
     margin-top: 10px;
@@ -12,15 +14,15 @@
 }
 
 .title {
-    margin: 4px; 
+    @include margin-element(4px) 
 }
 
 button {
-    margin: 4px;
+    @include margin-element(4px)
 }
 
 input {
-    margin: 4px;
+    @include margin-element(4px)
 }
 
 .helper-text-red {

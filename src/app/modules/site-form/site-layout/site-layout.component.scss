@@ -1,14 +1,16 @@
+@import "src/assets/variables";
+
 .navbar {
     width: 100%;
     height: 50px;
     left: 0px;
     top: 0px;
-    border: 1px solid #C2D6E1;
+    border: 1px solid $light;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 22px;
-    padding: 0 250px;
+    padding: 0 150px;
 }
 
 .big-size {
@@ -22,11 +24,11 @@
 }
 
 .clickable:hover {
-    background-color: #c2d6e14f;
+    background-color: $light-hover;
 }
 
 .blue {
-    color: #829DAC;
+    color: $light-blue;
 }
 
 .small-text {

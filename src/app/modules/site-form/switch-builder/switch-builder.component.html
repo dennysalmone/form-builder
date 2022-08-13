@@ -1,0 +1,66 @@
+<ng-container [ngSwitch]="item.inputType">
+    
+    <ng-container *ngSwitchCase="EInputType.Input">
+        <input 
+        cdkDrag 
+        [cdkDragDisabled]="true" 
+        [placeholder]="item.placeholder" 
+        class='form-element'
+        [ngStyle]="styles" 
+        [required]='item.required'>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="EInputType.Textarea">
+        <textarea 
+        [ngStyle]="styles"  
+        [required]='item.required'
+        cdkDrag [cdkDragDisabled]="true" [placeholder]="item.placeholder" class='form-element' name="textarea"></textarea>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="EInputType.Button">
+        <button 
+        cdkDrag 
+        [cdkDragDisabled]="true" 
+        class='form-element'
+        [ngStyle]="styles"  
+        >{{item.placeholder}}
+        </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="EInputType.Checkbox">
+        <div>
+            <label 
+            cdkDrag 
+            [cdkDragDisabled]="true" 
+            class='form-element'
+            [ngStyle]="styles"  
+            >{{item.placeholder}}
+            </label>
+            <ng-container *ngFor="let option of item.options, index as o">
+                <div>
+                <input type='checkbox'> {{option}}
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="EInputType.Select">
+        <select 
+        cdkDrag 
+        [cdkDragDisabled]="true" 
+        label="item.label" 
+        class='form-element' 
+        name="select"
+        [ngStyle]="styles"  
+        [required]='item.required'
+        >
+        <option disabled selected>{{item.placeholder}}</option>
+        <ng-container *ngFor="let option of item.options, index as o">
+            <option>{{option}}</option>
+        </ng-container>
+        </select>
+    </ng-container>
+
+</ng-container>
+
+

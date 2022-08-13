@@ -5,16 +5,18 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
+
 import { environment } from '../../environments/environment';
-import { counterReducer, CounterState } from './counter';
+import { stylesReducer } from './styles/styles.reducers';
+import { IState } from './styles/styles.interfaces';
+import { STYLE_KEY } from './styles/styles.enums';
 
 export interface State {
-  counter: CounterState;
+  [STYLE_KEY]: IState;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  counter: counterReducer,
+  [STYLE_KEY]: stylesReducer
 };
-
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];

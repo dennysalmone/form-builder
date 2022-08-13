@@ -12,13 +12,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { reducers, metaReducers } from './store';
 import { AppEffects } from './app.effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -27,12 +26,11 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     HttpClientModule,
     MatSnackBarModule,
     FormSiteModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers, 
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AppEffects]),
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    }),
-    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     {

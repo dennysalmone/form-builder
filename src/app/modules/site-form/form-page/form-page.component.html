@@ -2,8 +2,7 @@
     <div class="container">
       <div class="table-fields">
         <div class="form-edit-form pointer grad-1" (click)="toggleGeneralStylesForm()">Form Styles</div>
-          <form *ngIf="generalFormIsVisible" (ngSubmit)="onSubmit()" [formGroup]="generalStylesForm" class="example-form">
-
+          <form *ngIf="generalFormIsVisible" (ngSubmit)="onGeneralSubmit()" [formGroup]="generalStylesForm" class="example-form">
             <mat-form-field class="full-width mat-form-el" appearance="fill">
               <mat-label>Form Label</mat-label>
               <input matInput formControlName="label">
@@ -28,14 +27,56 @@
               <mat-label>Border Color</mat-label>
               <input matInput type="color" formControlName="borderColor">
             </mat-form-field>
+            <button type='submit' [disabled]="!generalStylesForm.valid" class='pointer form-element'>Apply</button>
+          </form>
 
-            <button type='submit' [disabled]="!generalStylesForm.valid" class='form-element'>Apply</button>
+          <div class="form-edit-form pointer grad-1" (click)="toggleElementStylesForm()">Element Styles</div>
+          <form *ngIf="elementFormIsVisible && elementStylesBase[counter]" (ngSubmit)="onElementSubmit(counter)" [formGroup]="elementStylesForm" class="example-form">
+            <mat-form-field class="full-width mat-form-el" appearance="fill">
+              <mat-label>Label</mat-label>
+              <input matInput formControlName="placeholder">
+            </mat-form-field>
+            <mat-form-field class="half-width mat-form-el" appearance="fill">
+              <mat-label>Width</mat-label>
+              <input matInput type="number" formControlName="width">
+            </mat-form-field>
+            <mat-form-field class="half-width mat-form-el" appearance="fill">
+              <mat-label>Height</mat-label>
+              <input matInput type="number" formControlName="height">
+            </mat-form-field>
+            <mat-form-field class="half-width mat-form-el" appearance="fill">
+              <mat-label>Border Style</mat-label>
+              <mat-select formControlName="border">
+                <mat-option *ngFor="let border of borders" [value]="border">
+                  {{border}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="half-width mat-form-el" appearance="fill">
+              <mat-label>Font Weight</mat-label>
+              <mat-select formControlName="fontWeight">
+                <mat-option *ngFor="let font of fontWeights" [value]="font">
+                  {{font}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="full-width mat-form-el" appearance="fill">
+              <mat-label>Font Size</mat-label>
+              <input matInput type="number" formControlName="fontSize">
+            </mat-form-field>
+            <mat-form-field *ngIf="elementStylesBase[counter].inputType == EInputType.Select || elementStylesBase[counter].inputType == EInputType.Checkbox" class="half-width mat-form-el" appearance="fill">
+              <mat-label>Add field</mat-label>
+              <input placeholder='split by ","' matInput formControlName="newField">
+            </mat-form-field>
+            <section *ngIf="elementStylesBase[counter].inputType !== EInputType.Checkbox && elementStylesBase[counter].inputType !== EInputType.Button" class="mat-form-el" appearance="fill">
+              <mat-checkbox matInput formControlName="required">Required</mat-checkbox>
+            </section>
+            <div class="button-group">
+              <button type='submit' [disabled]="!elementStylesForm.valid" class='pointer form-element'>Apply</button>
+              <button (click)="deleteElement(counter)" class='pointer form-element'>Delete</button>
+            </div>
           </form>
       </div>
-
-
-<!-- second block -->
-
 
       <div [ngStyle]="{'background': generalStyles.backgroundColor, 'border': generalStyles.borderType, 'border-color': generalStyles.borderColor}" class="table-fields">
         <div class="list-container">
@@ -46,84 +87,20 @@
               [cdkDropListData]="dropSection"
               [cdkDropListConnectedTo]="[secondList]"
               class="list-container"
-              (cdkDropListDropped)="dropped($event)">
-              <ng-container *ngFor="let item of dropSection, index as i">
-                <div [ngClass]="{'choised': i === idFormStyles}" (click)="onClick(item, i)" >
-                <ng-container *ngIf="item.type === inputEnum.Input">
-                    <input 
-                    cdkDrag 
-                    [cdkDragDisabled]="true" 
-                    [placeholder]="item.placeholder" 
-                    class='form-element'
-                    [ngStyle]="elementStyles(item)" 
-                    [required]='item.required'
-                    >
-                </ng-container>
-
-                <ng-container *ngIf="item.type === inputEnum.Textarea">
-                  <textarea 
-                  [ngStyle]="elementStyles(item)"  
-                  [required]='item.required'
-                  cdkDrag [cdkDragDisabled]="true" [placeholder]="item.placeholder" class='form-element' name="textarea" rows="1" cols="19"></textarea>
-                </ng-container>
-
-                <ng-container *ngIf="item.type === inputEnum.Button">
-                  <button 
-
-                  cdkDrag 
-                  [cdkDragDisabled]="true" 
-                  class='form-element'
-                  [ngStyle]="elementStyles(item)"  
-                  >{{item.placeholder}}</button>
-                </ng-container>
-
-                <ng-container *ngIf="item.type === inputEnum.Checkbox">
-                  <div>
-                    <label 
-                    cdkDrag 
-                    [cdkDragDisabled]="true" 
-                    class='form-element'
-                    [ngStyle]="elementStyles(item)"  
-                    >{{item.placeholder}}</label>
-                    <ng-container *ngFor="let option of item.options, index as o">
-                      <div>
-                        <input type='checkbox'> {{option}}
-                      </div>
-                    </ng-container>
-                  </div>
-
-                </ng-container>
-
-                <ng-container *ngIf="item.type === inputEnum.Select">
-                  <select 
-                  cdkDrag 
-                  [cdkDragDisabled]="true" 
-                  label="item.label" 
-                  class='form-element' 
-                  name="select"
-                  [ngStyle]="elementStyles(item)"  
-                  [required]='item.required'
+              (cdkDropListDropped)="dropped($any($event))">
+              <ng-container *ngFor="let item of dropSection">
+                <div class="flex" [ngClass]="{'choised': +item === counter}" (click)="changeCounter(+item)" >
+                  <app-switch-builder 
+                  [item]="elementStylesBase[+item]"
+                  [styles]="elementStyles(elementStylesBase[+item])"
                   >
-                    <option disabled selected>{{item.placeholder}}</option>
-                    <ng-container *ngFor="let option of item.options, index as o">
-                      <option>{{option}}</option>
-                    </ng-container>
-                  </select>
-                </ng-container>
+                  </app-switch-builder>
+                <span *ngIf="elementStylesBase[+item].required" class="red-small">*</span>
               </div>
               </ng-container>
             </div>
           </div>
         </div>
-
-
-
-
-
-
-<!-- third block -->
-
-
 
 
         <div class="table-fields">
@@ -138,6 +115,14 @@
                 </div>
               </div>
         </div>
-        
     </div>
 </div>
+
+<div class="temperature">
+  <input customOnlyNumbers [(ngModel)]="temperature">
+  <div>
+    {{temperature | customTemperature: 'F'}}
+  </div>
+</div>
+
+
