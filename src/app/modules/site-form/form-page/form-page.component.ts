@@ -151,7 +151,7 @@ export class FormPageComponent implements OnInit, OnDestroy {
     if(formValues.newField && formValues.newField.split(',').length) {
       const withoutLongSpaces: string = formValues.newField.split(/\s+/).join(' ');
       const arrayOfOptions: string[] = withoutLongSpaces.split(',');
-      const withoutEmptyValues = arrayOfOptions.filter(el => el.split(/\s+/).join('').length);
+      const withoutEmptyValues = arrayOfOptions.filter(el => el.trim().length);
       newElementStyles[index].options = withoutEmptyValues;
     }
 
